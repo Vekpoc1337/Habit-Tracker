@@ -12,6 +12,10 @@ const page = {
         progressPercent: document.querySelector(".progress__percent"),
         progressCoverBar: document.querySelector(".progress__cover-bar"),
     },
+    content: {
+        daysContainer: document.getElementById("days"),
+        nextDay: document.querySelector(".habbit__day"),
+    },
 };
 
 /* utils */
@@ -67,12 +71,34 @@ function rerenderHead(activeHabbit) {
     page.header.progressPercent.textContent = `${progress}%`;
 }
 
+function rerenderContent(activeHabbit) {
+    page.content.daysContainer.innerHTML = "";
+
+    activeHabbit.days.forEach((day, index) => {
+        const element = document.createElement("div");
+        element.classList.add("habbit");
+
+        element.innerHTML = `
+        <div class="habbit__day">День ${index + 1}</div>
+        <div class="habbit__comment">${day.comment ?? ""}</div>
+        <button class="habbit__delete" type="button" data-index="${index}">
+            <img src="./images/delete.svg" alt="Удалить день ${index + 1}" />
+        </button>
+    `;
+
+        page.content.daysContainer.appendChild(element);
+    });
+
+    page.content.nextDay.innerHTML = `День ${activeHabbit.days.length + 1}`;
+}
+
 function rerender(activeHabbitId) {
     const activeHabbit = habbits.find((habbit) => habbit.id === activeHabbitId);
     if (!activeHabbit) return;
 
     rerenderMenu(activeHabbit);
     rerenderHead(activeHabbit);
+    rerenderContent(activeHabbit);
 }
 
 console.log("menu element:", page.menu);
