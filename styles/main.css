@@ -57,8 +57,6 @@ button:hover {
     gap: 20px;
     align-items: center;
 }
-.menu__list {
-}
 
 .menu__item {
     background: #ffffff;
@@ -73,10 +71,10 @@ button:hover {
     background: #6a6afb;
 }
 .menu__item:hover img,
-.menu__item-active img {
+.menu__item_active img {
     filter: brightness(0) invert(1);
 }
-.menu__item-active {
+.menu__item_active {
     background: #5051f9;
 }
 
